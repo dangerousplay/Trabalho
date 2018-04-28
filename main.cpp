@@ -8,6 +8,7 @@
 #include <Windows.h>
 #include <iostream>
 #include <vector>
+#include <algorithm>
 
 
 // Algoritmo para pegar o tempo decorrido em milisegundos para fazer uma medição de desempenho
@@ -99,7 +100,7 @@ inline T SCANF(T &Value) {
 
 int main()
 {
-
+    std::vector<int> NumerosPrimos;
     std::cout << "Ola, digite um numero que deseja saber se e primo: ";
 
     long long number;
@@ -111,16 +112,31 @@ int main()
     long long start = milliseconds_now();
 
     long long count = 0;
+    long long TempCount = 0;
+
+    for(int i = 1; i < number; i+=2){
+        if(isPrime(number, TempCount)){
+            NumerosPrimos.push_back(i);
+            count += TempCount;
+        }
+    }
 
     bool prime = isPrime(number, count);
 
+    count += TempCount;
+
     long long elapsed = milliseconds_now() - start;
 
-    std::cout
-            << "Calculando o numero: " << number << std::endl
-            << "Esse numero e primo: " << (prime ? "sim" : "nao") << std::endl
-            << "Divisoes Realizadas: " << count << std::endl
-            << "Tempo Gasto: " << elapsed << "ms" << std::endl;
+    std::cout << "Calculando o numero: "     << number << std::endl
+              << "Numeros primos entre 1 e " << number << ":" << std::endl;
+
+    std::for_each(NumerosPrimos.begin(), NumerosPrimos.end(), [](int Numero){
+       std::cout << Numero;
+    });
+
+    std::cout << "Esse numero e primo: " << (prime ? "sim" : "nao") << std::endl
+              << "Divisoes Realizadas: " << count << std::endl
+              << "Tempo Gasto: " << elapsed << "ms" << std::endl;
 
     std::cout << std::endl;
 
