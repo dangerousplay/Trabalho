@@ -3,4 +3,4 @@ project(Trabalho)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(Trabalho main.cpp 20Numeros.cpp Intervalo.cpp)
+add_executable(Trabalho main.cpp)
