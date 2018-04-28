@@ -11,7 +11,6 @@
 
 
 // Algoritmo para pegar o tempo decorrido em milisegundos para fazer uma medição de desempenho
-
 long long milliseconds_now() {
     static LARGE_INTEGER s_frequency;
     static BOOL s_use_qpc = QueryPerformanceFrequency(&s_frequency);
@@ -126,7 +125,7 @@ int main()
     std::cout << std::endl;
 
     std::cout << "Aluno: Davi Ficanha Henrique "<< std::endl
-              << " Nota: 1.5 realizada todas as atividades pedidas." << std::endl;
+              << "Nota: 1.5 realizada todas as atividades pedidas." << std::endl;
 
 
     system("pause");

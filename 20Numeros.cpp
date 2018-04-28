@@ -74,7 +74,7 @@ int main()
     std::cout << "Media dos valores positivos: " << Media << std::endl << std::endl;
 
     std::cout << "Aluno: Davi Ficanha Henrique "<< std::endl
-              << " Nota: 1.5 realizada todas as atividades pedidas." << std::endl;
+              << "Nota: 1.5 realizada todas as atividades pedidas." << std::endl;
 
 
     system("pause");
