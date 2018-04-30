@@ -19,6 +19,7 @@ inline BOOL SCANF(T &Value) {
     return !(std::cin >> Value);
 }
 
+//Classe para facilitiar o recebimento das informações do usuário e para previnir de erros como input incorreto
 class Teclado {
 public:
     template<typename T>

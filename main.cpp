@@ -90,6 +90,7 @@ bool isPrime(unsigned long long n, unsigned long long &count)
 
 constexpr size_t log10(size_t xx) { return xx == 1 ? 0 : 1 + log10(xx / 10); }
 
+//Convertendo o tempo da std::chrono::Time_point para uma string para posteriormente ser imprimida
 template<typename TimePoint>
 inline bool toString(const TimePoint &timePoint, std::string &str) {
     uint64_t feconds = timePoint.time_since_epoch().count() * TimePoint::period::num;
@@ -100,7 +101,7 @@ inline bool toString(const TimePoint &timePoint, std::string &str) {
     return oss && (str = oss.str(), true);
 }
 
-
+//Convertendo de uma string para um objeto std::chrono::time_point
 template<typename TimePoint>
 bool fromString(TimePoint &timePoint, const std::string &str) {
     std::istringstream iss(str);
@@ -129,6 +130,7 @@ inline BOOL SCANF(T &Value) {
     return !(std::cin >> Value);
 }
 
+//Classe para facilitiar o recebimento das informações do usuário e para previnir de erros como input incorreto
 class Teclado {
 public:
     template<typename T>
