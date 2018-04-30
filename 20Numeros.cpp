@@ -1,5 +1,5 @@
 // Algorithms.cpp : define o ponto de entrada para o aplicativo do console.
-/*
+/**
  * 1) Faça um programa que leia do teclado 20 números inteiros (deve usar laço) e depois imprima:
  *    1º soma de todos os elementos;
  *    2º os dois maiores valores e os dois menores valores e;
@@ -13,10 +13,23 @@
 #include <algorithm>
 
 template<typename T>
-inline T SCANF(T &Value) {
-    std::cin >> Value;
-    return Value;
+inline BOOL SCANF(T &Value) {
+    return !(std::cin >> Value);
 }
+
+class Teclado {
+public:
+    template<typename T>
+    static inline T GetNumero() {
+        T Value;
+        while (SCANF(Value)) {
+            std::cout << "Digite um número válido" << std::endl;
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        }
+        return Value;
+    }
+};
 
 //Uma maneira mais simples para facilitar a entrada de informações do usuário
 template<typename T>
@@ -41,7 +54,8 @@ int main()
 
     //Pegando os 20 números do usuário
     for (int i = 0; i < 20; i++) {
-        NumerosInteiros.push_back(SCANF<int>());
+        unsigned int Numero = 0;
+        NumerosInteiros.push_back(Teclado::GetNumero<unsigned int>());
     }
 
     //Soma utilizando biblioteca std no Vector de números, seria equivalente a um loop com soma.

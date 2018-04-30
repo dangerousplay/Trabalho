@@ -1,5 +1,6 @@
 // Algorithms.cpp : define o ponto de entrada para o aplicativo do console.
-/*
+
+/**
  *  2) Faça um programa que receba dois números inteiros e mostre os números que estão no intervalo compreendido por eles.
  *  Além disso, a soma de todos os valores.
  */
@@ -14,10 +15,25 @@
 #define MIN(a,b) a < b ? a:b
 
 template<typename T>
-inline T SCANF(T &Value) {
-    std::cin >> Value;
-    return Value;
+inline BOOL SCANF(T &Value) {
+    return !(std::cin >> Value);
 }
+
+class Teclado {
+public:
+    template<typename T>
+    static inline T GetNumero() {
+        T Value;
+        while (SCANF(Value)) {
+            std::cout << "Digite um número válido" << std::endl;
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        }
+        return Value;
+    }
+};
+
+
 
 //Uma maneira mais simples para facilitar a entrada de informações do usuário
 template<typename T>
@@ -37,11 +53,17 @@ int main()
 
     long long SomaNumeros = 0;
 
-    std::cout << "Ola, digite o intervalo entre dois numeros que sera mostrado: " << std::endl;
+    std::cout << "Ola, digite o intervalo entre dois numeros que sera mostrado: ";
 
-    SCANF(PrimeiroNumero);
-    SCANF(SegundoNumero);
+    //SCANF(PrimeiroNumero);
+    //SCANF(SegundoNumero);
+    PrimeiroNumero = Teclado::GetNumero<int>();
 
+    std::cout << " e ";
+
+    SegundoNumero = Teclado::GetNumero<int>();
+
+    std::cout << std::endl;
 
     //Pegando os números que estão no intervalo compreendido
     for (int i = (MIN(PrimeiroNumero, SegundoNumero))+1; i < (MAX(PrimeiroNumero, SegundoNumero)); i++) {
@@ -50,7 +72,7 @@ int main()
 
     std::cout << std::endl;
 
-    std::cout << "Listando numeros entre " << PrimeiroNumero << " e " << SegundoNumero << std::endl;
+    std::cout << "Listando numeros entre " << PrimeiroNumero << " e " << SegundoNumero << ":" << std::endl;
 
     std::cout << std::endl;
 

@@ -9,20 +9,16 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <chrono>
+#include <iomanip>
+#include <cmath>
 
 
 // Algoritmo para pegar o tempo decorrido em milisegundos para fazer uma medição de desempenho
 long long milliseconds_now() {
-    static LARGE_INTEGER s_frequency;
-    static BOOL s_use_qpc = QueryPerformanceFrequency(&s_frequency);
-    if (s_use_qpc) {
-        LARGE_INTEGER now;
-        QueryPerformanceCounter(&now);
-        return (1000LL * now.QuadPart) / s_frequency.QuadPart;
-    }
-    else {
-        return GetTickCount();
-    }
+    auto TimeNow = std::chrono::high_resolution_clock::now().time_since_epoch();
+
+    return std::chrono::duration_cast<std::chrono::milliseconds>(TimeNow).count();
 }
 
 //Calcula se um número é par, utilizando o conceito do (n & 1) == 0
@@ -40,7 +36,7 @@ inline bool isOdd(long long number) {
  *  diminui as iterações, incrementando i += 6 e utilizando i*i <= n como condição de execução.
  */
 
-bool isPrime(long long n, long long &count)
+bool isPrime(unsigned long long n, unsigned long long &count)
 {
     if (n == 1)  return true;
     if (n <= 3)  return true;
@@ -73,7 +69,7 @@ bool isPrime(long long n, long long &count)
         return false;
     }
 
-    for (int i = 5; i*i <= n; i = i + 6) {
+    for (unsigned long long i = 5; i * i <= n; i = i + 6) {
         restModulus = n % i;
         count++;
 
@@ -92,51 +88,126 @@ bool isPrime(long long n, long long &count)
     return true;
 }
 
+constexpr size_t log10(size_t xx) { return xx == 1 ? 0 : 1 + log10(xx / 10); }
+
+template<typename TimePoint>
+inline bool toString(const TimePoint &timePoint, std::string &str) {
+    uint64_t feconds = timePoint.time_since_epoch().count() * TimePoint::period::num;
+    time_t tt = feconds / TimePoint::period::den;
+    std::ostringstream oss;
+    oss << std::put_time(std::localtime(&tt), "%Y-%m-%d %H:%M:%S.")
+        << std::setw(log10((size_t) TimePoint::period::den)) << std::setfill('0') << feconds % TimePoint::period::den;
+    return oss && (str = oss.str(), true);
+}
+
+
+template<typename TimePoint>
+bool fromString(TimePoint &timePoint, const std::string &str) {
+    std::istringstream iss(str);
+    std::tm tm{};
+    if (!(iss >> std::get_time(&tm, "%Y-%m-%d %H:%M:%S")))
+        return false;
+    timePoint = {};
+    timePoint += std::chrono::seconds(std::mktime(&tm));
+    if (iss.eof())
+        return true;
+    if (iss.get() != '.')
+        return false;
+    std::string zz;
+    if (!(iss >> zz))
+        return false;
+    static_assert(std::chrono::high_resolution_clock::period::den % 10 == 0);
+    zz.resize(log10((size_t) std::chrono::high_resolution_clock::period::den), '0');
+    size_t zeconds = 0;
+    try { zeconds = std::stoul(zz); } catch (const std::exception &) { return false; }
+    timePoint += std::chrono::high_resolution_clock::duration(zeconds);
+    return true;
+}
+
 template<typename T>
-inline T SCANF(T &Value) {
+inline BOOL SCANF(T &Value) {
+    return !(std::cin >> Value);
+}
+
+class Teclado {
+public:
+    template<typename T>
+    static inline T GetNumero() {
+        T Value;
+        while (SCANF(Value)) {
+            std::cout << "Digite um número válido" << std::endl;
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        }
+
+        return Value;
+    }
+};
+
+
+//Uma maneira mais simples para facilitar a entrada de informações do usuário
+template<typename T>
+inline T SCANF() {
+    T Value;
     std::cin >> Value;
     return Value;
 }
 
 int main()
 {
-    std::vector<int> NumerosPrimos;
-    std::cout << "Ola, digite um numero que deseja saber se e primo: ";
+    std::vector<unsigned long long> NumerosPrimos;
+    std::cout << "Olá, digite um numero que deseja encontrar os primos de 1 até este número: ";
 
-    long long number;
+    unsigned long long number;
 
-    SCANF(number);
+    //SCANF(number);
+    number = Teclado::GetNumero<unsigned long long>();
 
     std::cout << std::endl;
 
-    long long start = milliseconds_now();
+    std::chrono::time_point<std::chrono::system_clock> ClockStart = std::chrono::high_resolution_clock::now();
 
-    long long count = 0;
-    long long TempCount = 0;
+    std::string TimeDate;
 
-    for(int i = 1; i < number; i+=2){
-        if(isPrime(number, TempCount)){
+    toString(ClockStart, TimeDate);
+
+    std::cout << "Iniciando computação em: " << TimeDate << std::endl;
+
+    std::cout << std::endl;
+
+    unsigned long long count = 0;
+    unsigned long long TempCount = 0;
+
+    for (unsigned long long i = 1; i < number; i += 2) {
+        if (isPrime(i, TempCount)) {
             NumerosPrimos.push_back(i);
             count += TempCount;
         }
     }
 
-    bool prime = isPrime(number, count);
+    bool prime = isPrime(number, TempCount);
 
     count += TempCount;
 
-    long long elapsed = milliseconds_now() - start;
+    std::chrono::time_point<std::chrono::system_clock> ClockEnd = std::chrono::high_resolution_clock::now();
 
-    std::cout << "Calculando o numero: "     << number << std::endl
-              << "Numeros primos entre 1 e " << number << ":" << std::endl;
+    long long elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(ClockEnd - ClockStart).count();
+
+    toString(ClockEnd, TimeDate);
+
+    std::cout << "Calculando o numero: " << number << std::endl
+              << "Numeros primos entre 1 e " << number << ": ";
 
     std::for_each(NumerosPrimos.begin(), NumerosPrimos.end(), [](int Numero){
-       std::cout << Numero;
+        std::cout << Numero << " ";
     });
 
-    std::cout << "Esse numero e primo: " << (prime ? "sim" : "nao") << std::endl
+    std::cout << std::endl;
+
+    std::cout << "Esse numero é primo: " << (prime ? "sim" : "nao") << std::endl
               << "Divisoes Realizadas: " << count << std::endl
-              << "Tempo Gasto: " << elapsed << "ms" << std::endl;
+              << "Tempo Gasto: " << elapsed << "ms" << std::endl
+              << "Tempo agora: " << TimeDate << std::endl;
 
     std::cout << std::endl;
 
