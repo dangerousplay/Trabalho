@@ -106,7 +106,7 @@ int main() {
     unsigned long long NumeroFibonacci = 0;
     unsigned long long Argumento = 0;
 
-    std::cout << "Ola, digite o enesimo numero que deseja calcular da serie de fibonacci: ";
+    std::cout << "Olá, digite o enesimo numero que deseja calcular da serie de fibonacci: ";
 
     Argumento = Teclado::GetNumero<unsigned long long>();
 

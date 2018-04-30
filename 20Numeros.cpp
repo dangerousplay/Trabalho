@@ -51,7 +51,7 @@ int main()
 
     long long SomaNumeros = 0;
 
-    std::cout << "Ola, digite os 20 numeros inteiros: " << std::endl;
+    std::cout << "Olá, digite os 20 numeros inteiros: " << std::endl;
 
 
     //Pegando os 20 números do usuário

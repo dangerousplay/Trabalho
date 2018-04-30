@@ -54,7 +54,7 @@ int main()
 
     long long SomaNumeros = 0;
 
-    std::cout << "Ola, digite o intervalo entre dois numeros que sera mostrado: ";
+    std::cout << "Olá, digite o intervalo entre dois numeros que será mostrado: ";
 
     //SCANF(PrimeiroNumero);
     //SCANF(SegundoNumero);

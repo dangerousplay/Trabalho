@@ -12,7 +12,7 @@
 #include <chrono>
 #include <iomanip>
 #include <cmath>
-
+#include <mutex>
 
 // Algoritmo para pegar o tempo decorrido em milisegundos para fazer uma medição de desempenho
 long long milliseconds_now() {
@@ -145,7 +145,6 @@ public:
         return Value;
     }
 };
-
 
 //Uma maneira mais simples para facilitar a entrada de informações do usuário
 template<typename T>
