@@ -1,4 +1,3 @@
-// Algorithms.cpp : define o ponto de entrada para o aplicativo do console.
 /**
  * 4)  Um número primo é aquele que é divisível somente por ele mesmo e por 1.
  * Faça um programa que mostre todos os primos entre 1 e N sendo N um número inteiro fornecido pelo usuário.
