@@ -11,4 +11,4 @@ set(CMAKE_CXX_FLAGS_RELEASE "-O3")
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(Trabalho main.cpp)
+add_executable(Trabalho AlgoritmoPrimos.cpp)
