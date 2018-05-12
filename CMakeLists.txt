@@ -6,9 +6,9 @@ if (NOT CMAKE_BUILD_TYPE)
 endif ()
 
 set(CMAKE_CXX_FLAGS "-Wall -Wextra")
-set(CMAKE_CXX_FLAGS_DEBUG "-O3")
-set(CMAKE_CXX_FLAGS_RELEASE "-O3")
+#set(CMAKE_CXX_FLAGS_DEBUG "-O3")
+#set(CMAKE_CXX_FLAGS_RELEASE "-O3")
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(Trabalho AlgoritmoPrimos.cpp)
+add_executable(Trabalho prova/Pizzaiolo.cpp)

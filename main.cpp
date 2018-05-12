@@ -155,6 +155,9 @@ inline T SCANF() {
 
 int main()
 {
+    using namespace std::chrono_literals;
+    using namespace std;
+
     std::vector<unsigned long long> NumerosPrimos;
     std::cout << "Olá, digite um numero que deseja encontrar os primos de 1 até este número: ";
 
