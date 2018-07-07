@@ -23,6 +23,7 @@ int main(){
             scanf("%i",&valor);
             if(valor % 2 != 0){
                 printf("Digite um valor par!\n");
+                printf("%i - ", i+1);
             } else{
                 numeros[i] = valor;
             }

@@ -73,7 +73,7 @@ public:
     }
 
     size_t getStringSize(){
-        return strlen(characters);
+        return static_cast<size_t>(index);
     }
 
     bool containsChar(char character){
@@ -94,7 +94,32 @@ public:
     }
 };
 
-
+bool isDigit(char c){
+    switch (c){
+        case '0':
+            return true;
+        case '1':
+            return true;
+        case '2':
+            return true;
+        case '3':
+            return true;
+        case '4':
+            return true;
+        case '5':
+            return true;
+        case '6':
+            return true;
+        case '7':
+            return true;
+        case '8':
+            return true;
+        case '9':
+            return true;
+        default:
+            return false;
+    }
+}
 
 
 int main(){
@@ -112,7 +137,7 @@ int main(){
 
     char* stringBuffer = texto.getCharacters();
 
-    size = strlen(stringBuffer);
+    size = texto.getStringSize();
 
     String buffer;
 
@@ -122,20 +147,17 @@ int main(){
 
         if(c == ' '){
             espacos++;
-        } else if(isalpha(c)) {
+        } else if(isalpha(c) && !isDigit(c)) {
             letras++;
-        } else if(buffer.containsChar(c)){
-
-        } else {
+        } else if(!isDigit(c)){
             letrasDiferentes++;
-            buffer.append(c);
         }
     }
 
     printf("Caracteres digitados: %i \n",texto.getStringSize());
     printf("Letras digitadas: %i \n", letras);
     printf("Espaços: %i \n",espacos);
-    printf("Caracteres diferentes: %i \n",letrasDiferentes);
+    printf("Caracteres diferentes de letras e espaços: %i \n", letrasDiferentes);
 
 
 

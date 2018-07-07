@@ -34,10 +34,6 @@ unsigned long long fibonacci(unsigned long long n) {
 int main(){
     unsigned long long fibon[100];
 
-    for(unsigned long long int i = 0; i < 100; i++){
-        fibon[i] = fibonacci(i);
-    }
-
     printf("Digite o Nº número da seqência de fibonacci entre 2 e 100: ");
 
     int n;
@@ -48,6 +44,11 @@ int main(){
         }
     }while(n < 2 || n > 100);
 
-    printf("Nº termo de fibonacci: %llu", fibon[n-1]);
+    for(unsigned long long int i = 0; i < n; i++){
+        fibon[i] = fibonacci(i);
+        printf("%lluº termo de fibonacci: %llu \n",i+1, fibon[i]);
+    }
+
+
 
 }
