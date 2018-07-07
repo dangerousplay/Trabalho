@@ -1,0 +1,5 @@
+4. Qual a importância e as vantagens do desenvolvimento de programação Modular (com funções)?
+
+As funções permitem que o código desenvolvido seja reutilizado de forma mais proveitosa,
+permitindo o desenvolvimento em partes de um programa ao mesmo tempo. Além de remover a
+repetição de código e facilitar na manutenção do programa desenvolvido.

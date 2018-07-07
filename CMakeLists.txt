@@ -14,4 +14,4 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_C_STANDARD 11)
 
 
-add_executable(Trabalho trabalho/Senha.cpp)
+add_executable(Trabalho prova2/Questao3.cpp)
