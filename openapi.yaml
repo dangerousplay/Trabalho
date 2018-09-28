@@ -17082,7 +17082,7 @@ paths:
       description: "Carrega um conjunto de dados necessários para montar os dados das telas de dashboard, utilizando valor de contribuição diferente para simular resultados."
       parameters:
       - name: cpf
-        description: "Cpf do participante"
+        description: "CPF do participante"
         in: query
         required: true
         schema:
@@ -22496,8 +22496,8 @@ components:
           example: '141'
           type: string
         numeroAgencia:
-          description: '6946'
-          example: Número da agência
+          description: Número da agência
+          example: '6946'
           type: string
         numeroConta:
           description: Número da conta
@@ -27049,11 +27049,11 @@ components:
           properties:
             sucesso:
               example: true
-              description: "Flag que indica se o cpf está autorizado para realizar o primeiro acesso"
+              description: "Flag que indica se o CPF está autorizado para realizar o primeiro acesso"
               type: boolean
             mensagem:
               example: "CPF localizado. Participante com plano ativo."
-              description: "Mensagem que indica se o cpf está ou não autorizado para realizar o primeiro acesso, e se não, qual é o motivo da restrição"
+              description: "Mensagem que indica se o CPF está ou não autorizado para realizar o primeiro acesso, e se não, qual é o motivo da restrição"
               type: string
             telefones:
               description: "Lista de telefones cadastrados na base do aplicativo para confirmar o device do usuário"
@@ -27073,7 +27073,7 @@ components:
       type: object
       properties:
         cpf:
-          description: "Cpf do participante com primeiro acesso autorizado"
+          description: "CPF do participante com primeiro acesso autorizado"
           type: string
         senha:
           description: "Senha informada para o cadastro do usuário"
@@ -27862,7 +27862,7 @@ components:
         cpf:
           type: string
           example: ""
-          description: "Cpf do participante que se deseja incluir numero de telefone"
+          description: "CPF do participante que se deseja incluir numero de telefone"
         codigoPlano:
           type: integer
           example: 1
@@ -27995,7 +27995,7 @@ components:
         cpf:
           type: string
           example: ""
-          description: "Cpf do participante que desmarcou a leitura da notificação"
+          description: "CPF do participante que desmarcou a leitura da notificação"
     postNotificacaoNaoLidaResponse:
       type: object
       properties:
@@ -28027,7 +28027,7 @@ components:
       properties:
         cpf:
           example: ""
-          description: "Cpf do participante"
+          description: "CPF do participante"
           nullable: true
           type: string
         nomeContato:
@@ -28037,7 +28037,7 @@ components:
         email:
           type: string
           example: ""
-          description: "Email do participante que está solicitando o contato"
+          description: "E-mail do participante que está solicitando o contato"
         telefone:
           nullable: true
           type: string
@@ -28687,7 +28687,7 @@ components:
           type: string
         cpf:
           example: ""
-          description: "Cpf do participante do qual deve ser procurado e enviado o informe"
+          description: "CPF do participante do qual deve ser procurado e enviado o informe"
           type: string
         codigoPlano:
           example: 1
